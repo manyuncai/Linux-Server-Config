@@ -1,4 +1,4 @@
-###Project 6: Linux Server Configuration ![CI status](https://img.shields.io/badge/build-passing-brightgreen.svg)
+#Project 6: Linux Server Configuration ![CI status](https://img.shields.io/badge/build-passing-brightgreen.svg)
 
 <b>Linux Server Configuration </b> This project is set up and secure a Linux server to host one of the Fullstack web application  <b>Item Catalog App</b> we built in lesson 3 The backend: Databases & Application. A new Ubuntu Linux server instance on Amazon LightSail is configured to host the Flask application with  Apache, python and PostgreSQL server.  
 
@@ -8,7 +8,7 @@ Linux Server Configuration
 * public IP: 18.224.62.191
 * port: 2200
 * Catalog App: https://github.com/manyuncai/catalog
-* Linux Readme: https://github.com/manyuncai/Linux-Server-Config/blob/master/readme.md
+* Linus Configuration Readme: https://github.com/manyuncai/Linux-Server-Config/blob/master/readme.md
 
 
 ### Step 1
@@ -108,7 +108,7 @@ Save file (ctrl o ) and exit (ctrl x)
 
 * In my local machine, verify I can login as grader with the public ip address from lightsail
 
- `$ ssh —i /c/users/manyu/.ssh/key.pem gradera18.224.62.191 —p 2200 `
+ `$ ssh -i /c/users/manyu/.ssh/key.pem grader@18.224.62.191 -p 2200 `
 
 ### Step 9
 * Prepare to deploy your project.
@@ -183,8 +183,7 @@ Save file (ctrl o ) and exit (ctrl x)
 ### step 14
 * Set it up in your server so that it functions correctly when visiting your server’s IP address in a browser.
 * In ubuntu@ip-private:~$ terminal run: `$ sudo nano /etc/apache2/sites-available/catalog.conf`
-```
-<VirtualHost *:80>
+`<VirtualHost *:80>
                 ServerName 18.224.62.191
                 ServerAdmin manyuncai@yahoo.com
                 WSGIScriptAlias / /var/www/catalog/catalog.wsgi
@@ -200,23 +199,22 @@ Save file (ctrl o ) and exit (ctrl x)
                 ErrorLog ${APACHE_LOG_DIR}/error.log
                 LogLevel warn
                 CustomLog ${APACHE_LOG_DIR}/access.log combined
-</VirtualHost>
-```
+</VirtualHost>`
 
 * Enabled the virtual host with command: `$ sudo a2ensite catalog`
 * Create the .wsgi file:
  `$ cd /var/www/catalog`
  `$ sudo nano catalog.wsgi`
-```
- #!/usr/bin/python
+
+` #!/usr/bin/python
  import sys
  import logging
  logging.basicConfig(stream=sys.stderr)
  sys.path.insert(0,"/var/www/catalog/")
 
  from catalog import app as application
- application.secret_key = 'super_secret_key'
-```
+ application.secret_key = 'super_secret_key' `
+
 * Restart Apache: `$ sudo service apache2 restart`
 
 ### Contributing
