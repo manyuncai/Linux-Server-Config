@@ -1,4 +1,4 @@
-#Project 6: Linux Server Configuration ![CI status](https://img.shields.io/badge/build-passing-brightgreen.svg)
+# Project 6: Linux Server Configuration ![CI status](https://img.shields.io/badge/build-passing-brightgreen.svg)
 
 <b>Linux Server Configuration </b> This project is set up and secure a Linux server to host one of the Fullstack web application  <b>Item Catalog App</b> we built in lesson 3 The backend: Databases & Application. A new Ubuntu Linux server instance on Amazon LightSail is configured to host the Flask application with  Apache, python and PostgreSQL server.  
 
@@ -136,7 +136,7 @@ Save file (ctrl o ) and exit (ctrl x)
 
  ` $ sudo nano /etc/postgresql/9.5/main/pg_hba.conf`
 
-* Create a new database user named catalog that has limited permissions to your catalog application database. Switch to postgres mode to create a new database(catalog), user(catalog) and set password(catalog).
+* Create a new database user named catalog that has limited permissions to your catalog application database. Switch to postgres mode to create a new database(catalog), user(catalog) and set password(catalog). Refer to <a href="http://www.yolinux.com/TUTORIALS/LinuxTutorialPostgreSQL.html"> YoLinux Tutorial: The PostgreSQL Database and Linux </a> and check database, table and data in PostgreSQL.
 
  ` $ sudo su - postgres`
 
@@ -171,14 +171,18 @@ Save file (ctrl o ) and exit (ctrl x)
  `$ git clone https://github.com/manyuncai/catalog `
 
  * change to dir after clone project `cd catalog `
- * In this directory: change project.py to __init__.py with `sudo mv project.py  __init__.py`
- * with `sudo nano __init__.py` and `sudo nano database_set.py`, change engine to
-  engine = create_engine ('postgresql://catalog:catalog@localhost/catalog')
+ * In this directory: change project.py to `__init__.py` with `sudo mv project.py  __init__.py`
+ * with `sudo nano __init__.py`, `sudo nano database_set.py` and `sudo nano lotsofcatalogItems.py` change
+
+   `engine = create_engine('sqlite:///catalogdatabasewithusers.db')`
+   to
+
+    `engine = create_engine ('postgresql://catalog:catalog@localhost/catalog')`
  * install  and upgrade flask_sqlalchemy ` $ sudo pip install flask_sqlalchemy` & `$ sudo pip install --upgrade pip`
  * install oauth2clint ` sudo pip install --upgrade google-api-python-client oauth2clint`
  * install requests ` sudo pip install requests`
  * install sqlalchemy-utils `sudo pip install sqlalchemy-utils`
- * Run python __init__.py and database_setup.py, verify no more errors: Run python __init__.py and database_setup.py, verify no more errors: `sudo python database_setup.py` & `sudo python __init__.py`
+ * Run python __init__.py and database_setup.py, verify no more errors: `sudo python database_setup.py` & `sudo python lotsofcatalogItems.py`&`sudo python __init__.py`
 
 ### step 14
 * Set it up in your server so that it functions correctly when visiting your server’s IP address in a browser.
@@ -186,6 +190,7 @@ Save file (ctrl o ) and exit (ctrl x)
 ````
 <VirtualHost *:80>
                 ServerName 18.224.62.191
+                ServerAlias 18.224.62.191.xip.io
                 ServerAdmin manyuncai@yahoo.com
                 WSGIScriptAlias / /var/www/catalog/catalog.wsgi
                 <Directory /var/www/catalog/catalog/>
@@ -220,10 +225,17 @@ Save file (ctrl o ) and exit (ctrl x)
  ````
 
 * Restart Apache: `$ sudo service apache2 restart`
+* In googleAPI console, add http://18.224.62.191 AND http://18.224.62.191.xip.io to authorized JavaScript Origins and authorized redirect URIs
+* Troubleshoot: `sudo tail /var/log/apache2/error.log`
+ * add path `var/www/catalog/catalog/` to ` __init__.py` line 39:
+`CLIENT_ID = json.loads(
+    open('var/www/catalog/catalog/client_secrets.json', 'r').read())['web']['client_id']
+`
 
 ### Contributing
-* <a href="https://aws.amazon.com/premiumsupport/knowledge-center/new-user-accounts-linux-instance/"> Amazon Doc </a>
-* <a href="https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps"> Digital Ocean Doc </a>
+* <a href="https://aws.amazon.com/premiumsupport/knowledge-center/new-user-accounts-linux-instance/"> Amazon document </a>
+* <a href="https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps"> Digital Ocean document </a>
+* <a href="http://www.yolinux.com/TUTORIALS/LinuxTutorialPostgreSQL.html"> YoLinux Tutorial: The PostgreSQL Database and Linux </a>
 
 ### Known Bugs
 completed all 14 steps to configure server and catalog app, no error in log file. However I am not seeing the app running in the public ip address. Today is the due date for the project, I am submitting for review and suggestion and I can correct the issue.
