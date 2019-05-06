@@ -6,6 +6,7 @@
 ### Repository location
 Linux Server Configuration
 * public IP: 18.224.62.191
+* server alias: http://18.224.62.191.xip.io/catalog/
 * port: 2200
 * Catalog App: https://github.com/manyuncai/catalog
 * Linus Configuration Readme: https://github.com/manyuncai/Linux-Server-Config/blob/master/readme.md
@@ -238,4 +239,4 @@ Save file (ctrl o ) and exit (ctrl x)
 * <a href="http://www.yolinux.com/TUTORIALS/LinuxTutorialPostgreSQL.html"> YoLinux Tutorial: The PostgreSQL Database and Linux </a>
 
 ### Known Bugs
-completed all 14 steps to configure server and catalog app, no error in log file. However I am not seeing the app running in the public ip address. Today is the due date for the project, I am submitting for review and suggestion and I can correct the issue.
+The
