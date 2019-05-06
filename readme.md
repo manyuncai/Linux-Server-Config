@@ -21,8 +21,7 @@ Linux Server Configuration
 ### Step 3
 * Update all currently installed packages: at ubuntu@ip-private-IP:$ run
 
-  `$ sudo apt-get update`
-  `$ sudo apt-get upgrade`
+  `$ sudo apt-get update && sudo apt-get dist-upgrade`
 
 ### Step 4  
 * Change the SSH port from 22 to 2200. Make sure to configure the Lightsail firewall to allow it; in lightsail instance, under Networking, change firewall  
@@ -101,7 +100,7 @@ Save file (ctrl o ) and exit (ctrl x)
 
  `$ chmod 600 .ssh/authorized keys ` Use the chmod command to change the .ssh/authorized_keys file permissions to 600, with instruction from <a href="https://aws.amazon.com/premiumsupport/knowledge-center/new-user-accounts-linux-instance/"> Amazon Doc </a>
 
-* in grader@ip-private-ip:~$ Forcing the key base authentication by changing the passwordAuthentication to no, and restart the ssh
+* in grader@ip-private-ip:~$ Forcing the key base authentication by changing the passwordAuthentication to no, and PermitRootLogin to no and restart the ssh
 
  `$ sudo nano /etc/ssh/sshd_config `
 
@@ -239,4 +238,4 @@ Save file (ctrl o ) and exit (ctrl x)
 * <a href="http://www.yolinux.com/TUTORIALS/LinuxTutorialPostgreSQL.html"> YoLinux Tutorial: The PostgreSQL Database and Linux </a>
 
 ### Known Bugs
-No bug is detect for the server configuration, however, my catalog App's "Edit", "Add", "Delete" and "Login" functions are missing. I test run the application in the local machine, same result. Therefore the server is configure correctly and host the app as it is. 
+No bug is detect for the server configuration, however, my catalog App's "Edit", "Add", "Delete" and "Login" functions are missing. I test run the application in the local machine, same result. Therefore the server is configure correctly and host the app as it is.
