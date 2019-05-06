@@ -239,4 +239,4 @@ Save file (ctrl o ) and exit (ctrl x)
 * <a href="http://www.yolinux.com/TUTORIALS/LinuxTutorialPostgreSQL.html"> YoLinux Tutorial: The PostgreSQL Database and Linux </a>
 
 ### Known Bugs
-The
+No bug is detect for the server configuration, however, my catalog App's "Edit", "Add", "Delete" and "Login" functions are missing. I test run the application in the local machine, same result. Therefore the server is configure correctly and host the app as it is. 
